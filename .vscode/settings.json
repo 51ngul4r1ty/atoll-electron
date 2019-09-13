@@ -1,0 +1,22 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "build": true,
+        "coverage": true,
+        "node_modules": true,
+    },
+    "bookmarks.navigateThroughAllFiles": true,
+    "bookmarks.backgroundLineColor": "#102030",
+    "editor.formatOnSave": true,
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.coverageFileNames": [
+        "lcov.info"
+    ],
+    "coverage-gutters.lcovname": "lcov.info",
+    "coverage-gutters.coverageReportFileName": "coverage/**/index.html",
+    "coverage-gutters.showLineCoverage": false
+}
