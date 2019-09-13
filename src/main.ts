@@ -18,8 +18,14 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             webSecurity: false
-        }
+        } //,
+        // titleBarStyle: "customButtonsOnHover",
+        // frame: false
+        // frame: false
     });
+
+    // this hides the menu
+    mainWindow.setMenu(null);
 
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
