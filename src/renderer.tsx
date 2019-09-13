@@ -17,29 +17,6 @@ const { MainLayout } = layouts;
 
 const store = configureStore({});
 
-// document.getElementById("app");
-
-// if (process.env.NODE_ENV === "development") {
-//     if (module.hot) {
-//         module.hot.accept();
-//     }
-
-//     if (!window.store) {
-//         window.store = store;
-//     }
-// }
-
-// Imports - External
-// import * as React from "react";
-// import { Provider } from "react-redux";
-// import { Router } from "react-router";
-// import { syncHistoryWithStore, routerReducer } from "react-router-redux";
-
-// Imports - Internal
-// import LocalHistory from "../app-local/LocalHistory";
-// import routes from "./routes";
-// import store from "./store";
-
 const mountElt = document.getElementById("appMountElt");
 
 const providerElt = (
