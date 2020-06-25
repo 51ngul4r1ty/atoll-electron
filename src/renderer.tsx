@@ -2,34 +2,32 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 
 // redux related
-import { configureStore } from "@atoll/shared";
-
-// main app
-import { App } from "@atoll/shared";
+import { configureStore, createClientHistory, storeHistoryInstance, initConfig } from "@atoll/shared";
 
 // shared code
-// import { IntlProvider } from "@atoll/shared";
-import { layouts } from "@atoll/shared";
-const { MainLayout } = layouts;
+import { buildRoutesForElectron } from "common/routeBuilder";
 
-const store = configureStore({});
+const history = createClientHistory();
+storeHistoryInstance(history);
+
+// TODO: Allow this to be configured - for now it is hard-coded to local development
+initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
+
+const store = configureStore({
+    initialState: { app: { executingOnClient: true } },
+    history,
+    middleware: []
+});
 
 const mountElt = document.getElementById("appMountElt");
+console.log(`SET UP MOUNT ELT: ${!!mountElt}`);
 
 const providerElt = (
     <Provider store={store}>
-        <Router>
-            {/* <IntlProvider> */}
-                <MainLayout>
-                    <Switch>
-                        <Route path="/" component={App} />
-                    </Switch>
-                </MainLayout>
-            {/* </IntlProvider> */}
-        </Router>
+        <ConnectedRouter history={history}>{buildRoutesForElectron(window)}</ConnectedRouter>
     </Provider>
 );
 
