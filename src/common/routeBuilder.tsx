@@ -23,6 +23,7 @@ const appRoutes = (
                 <Route path="/plan" exact component={PlanViewContainer} />
                 <Route path="/sprint" exact component={SprintViewContainer} />
                 <Route path="/review" exact component={ReviewViewContainer} />
+                <Route component={LoginViewContainer} />
             </Switch>
         </AppContainer>
     </layouts.MainLayout>
