@@ -1,4 +1,12 @@
+import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
+
 const { app, BrowserWindow } = require("electron");
+
+app.whenReady().then(() => {
+    installExtension(REDUX_DEVTOOLS)
+        .then((tool) => console.log(`Added Extension:  ${tool.name}`))
+        .catch((err) => console.log("An error occurred: ", err));
+});
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {

@@ -21,11 +21,11 @@ const paths = {
     // srcServer: resolveApp("src/server"),
     // srcShared: resolveApp("src/shared"),
     types: resolveApp("node_modules/@types"),
-//    i18n: resolveApp("src/shared/i18n"),
+    //    i18n: resolveApp("src/shared/i18n"),
     publicPath: "/static/"
 };
 
-paths.resolveModules = [ /*paths.srcClient, paths.srcServer, paths.srcShared,*/ paths.src, "node_modules"];
+paths.resolveModules = [/*paths.srcClient, paths.srcServer, paths.srcShared,*/ paths.src, "node_modules"];
 
 //const path = require("path");
 //const ManifestPlugin = require("webpack-manifest-plugin");
@@ -177,6 +177,10 @@ module.exports = {
         /* dev - plugins that must load first */
         new WriteFileWebpackPlugin(),
 
+        new webpack.SourceMapDevToolPlugin({
+            sourceRoot: "../src"
+        }),
+
         /* shared */
         new MiniCssExtractPlugin({
             filename: process.env.NODE_ENV === "development" ? "[name].css" : "[name].[contenthash].css",
@@ -193,7 +197,7 @@ module.exports = {
 
         /* dev - plugins that should load later */
         // TODO: See if this can be added back - just testing to see if this is the cause of the infinite-reloading issue
-        //        new webpack.HotModuleReplacementPlugin()
+        // x       new webpack.HotModuleReplacementPlugin()
     ],
     stats: {
         colors: true
