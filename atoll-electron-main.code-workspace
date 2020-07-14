@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "C:\\Git\\51ngul4r1ty\\atoll-shared"
+		}
+	],
+	"settings": {
+		"bookmarks.navigateThroughAllFiles": true,
+		"bookmarks.backgroundLineColor": "#102030",
+		"coverage-gutters.showGutterCoverage": true,
+		"coverage-gutters.coverageFileNames": [
+			"lcov.info"
+		],
+		"coverage-gutters.lcovname": "lcov.info",
+		"coverage-gutters.coverageReportFileName": "coverage/**/index.html",
+		"coverage-gutters.showLineCoverage": false
+	}
+}
