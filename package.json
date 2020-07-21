@@ -1,7 +1,7 @@
 {
   "name": "atollelectron",
   "productName": "atollelectron",
-  "version": "0.1.0-alpha.1",
+  "version": "0.13.2",
   "author": {
     "name": "Kevin Berry",
     "email": "41717340+51ngul4r1ty@users.noreply.github.com"
@@ -36,7 +36,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@atoll/shared": "file:.yalc/@atoll/shared",
+    "@atoll/shared": "0.13.2",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.19.2",
@@ -51,6 +51,7 @@
     "history": "4.10.1",
     "i18next": "19.0.0",
     "immer": "5.3.6",
+    "minimist": ">=1.2.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-helmet": "5.2.1",
@@ -68,6 +69,7 @@
     "@babel/plugin-proposal-class-properties": "7.10.1",
     "@babel/plugin-proposal-object-rest-spread": "7.10.3",
     "@babel/plugin-proposal-optional-chaining": "7.10.3",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
     "@babel/preset-env": "7.10.2",
     "@babel/preset-react": "7.10.1",
     "@babel/preset-typescript": "7.10.1",
@@ -103,14 +105,14 @@
     "css-hot-loader": "1.4.4",
     "css-loader": "3.4.2",
     "dependency-cruiser": "9.7.0",
-    "electron": "6.0.7",
+    "electron": "9.0.5",
     "eslint": "6.8.0",
     "eslint-config-wiremore": "3.0.5",
     "file-loader": "5.1.0",
     "html-webpack-plugin": "3.2.0",
     "i18next-scanner": "2.10.2",
-    "jest": "24.9.0",
-    "jest-cli": "24.9.0",
+    "jest": "25.5.3",
+    "jest-cli": "25.5.3",
     "mini-css-extract-plugin": "0.9.0",
     "nodemon": "2.0.2",
     "open-cli": "6.0.1",
