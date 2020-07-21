@@ -19,6 +19,7 @@ import {
 // shared code
 import { buildRoutesForElectron } from "common/routeBuilder";
 import { AppState } from "@atoll/shared";
+import { layouts } from "@atoll/shared";
 
 const history = createElectronClientHistory();
 storeHistoryInstance(history);
