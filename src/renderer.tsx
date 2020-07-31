@@ -33,7 +33,6 @@ const syncHistoryWithStore = (appStore, appHistory) => {
 // TODO: Allow this to be configured - for now it is hard-coded to local development
 initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
 
-// BUSY HERE --------------- Why doesn't this get used by FlopFlip?  It seems to be using the other state that's from "window"???
 const featureToggles: FeatureTogglesState = {
     toggles: FEATURE_TOGGLE_LIST
 };
