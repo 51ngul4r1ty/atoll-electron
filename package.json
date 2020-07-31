@@ -1,7 +1,7 @@
 {
   "name": "atollelectron",
   "productName": "atollelectron",
-  "version": "0.13.2",
+  "version": "0.15.0",
   "author": {
     "name": "Kevin Berry",
     "email": "41717340+51ngul4r1ty@users.noreply.github.com"
@@ -36,7 +36,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@atoll/shared": "0.13.2",
+    "@atoll/shared": "file:.yalc/@atoll/shared",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.19.2",
@@ -106,6 +106,7 @@
     "css-loader": "3.4.2",
     "dependency-cruiser": "9.7.0",
     "electron": "9.0.5",
+    "electron-devtools-installer": "3.1.1",
     "eslint": "6.8.0",
     "eslint-config-wiremore": "3.0.5",
     "file-loader": "5.1.0",

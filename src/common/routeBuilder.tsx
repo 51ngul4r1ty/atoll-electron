@@ -4,6 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import { ConfigureFlopFlip } from "@flopflip/react-broadcast";
 import adapter from "@flopflip/memory-adapter";
 
+// libraries
+import { buildFeatureTogglesList, FEATURE_TOGGLE_LIST } from "@atoll/shared";
+
 // components
 import {
     IntlProvider,
@@ -33,7 +36,8 @@ const getDefaultFlags = (windowObj: any, forSsr: boolean) => {
     if (forSsr) {
         return { showEditButton: false };
     }
-    return (windowObj as any).__TOGGLES__;
+    const toggles = (windowObj as any).__TOGGLES__ || buildFeatureTogglesList(FEATURE_TOGGLE_LIST);
+    return toggles;
 };
 
 export const buildRoutes = (windowObj: any, forSsr: boolean) => (
@@ -44,11 +48,6 @@ export const buildRoutes = (windowObj: any, forSsr: boolean) => (
             defaultFlags={getDefaultFlags(windowObj, forSsr)}
         >
             {({ isAdapterReady }) => {
-                if (isAdapterReady) {
-                    console.log("isAdapterReady = true");
-                } else {
-                    console.log("isAdapterReady = false");
-                }
                 return isAdapterReady ? appRoutes : <div>LOADING...</div>;
             }}
         </ConfigureFlopFlip>

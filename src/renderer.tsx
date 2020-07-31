@@ -19,7 +19,6 @@ import {
 // shared code
 import { buildRoutesForElectron } from "common/routeBuilder";
 import { AppState } from "@atoll/shared";
-import { layouts } from "@atoll/shared";
 
 const history = createElectronClientHistory();
 storeHistoryInstance(history);
@@ -34,6 +33,7 @@ const syncHistoryWithStore = (appStore, appHistory) => {
 // TODO: Allow this to be configured - for now it is hard-coded to local development
 initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
 
+// BUSY HERE --------------- Why doesn't this get used by FlopFlip?  It seems to be using the other state that's from "window"???
 const featureToggles: FeatureTogglesState = {
     toggles: FEATURE_TOGGLE_LIST
 };
@@ -44,7 +44,8 @@ const newState: StateTree = { ...oldState, app: newApp, featureToggles };
 const store = configureStore({
     initialState: newState, // { app: { executingOnClient: true } },
     history,
-    middleware: []
+    middleware: [],
+    windowRef: window
 });
 syncHistoryWithStore(store, history);
 
