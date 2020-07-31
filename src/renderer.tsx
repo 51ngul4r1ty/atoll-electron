@@ -5,14 +5,15 @@ import { remote } from "electron";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 
-// redux related
+// libraries
 import {
-    configureStore,
-    createElectronClientHistory,
     storeHistoryInstance,
     initConfig,
-    FeatureTogglesState,
+    createElectronClientHistory,
+    configureStore,
+    buildFeatureTogglesList,
     StateTree,
+    FeatureTogglesState,
     FEATURE_TOGGLE_LIST
 } from "@atoll/shared";
 
@@ -34,7 +35,7 @@ const syncHistoryWithStore = (appStore, appHistory) => {
 initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
 
 const featureToggles: FeatureTogglesState = {
-    toggles: FEATURE_TOGGLE_LIST
+    toggles: buildFeatureTogglesList(FEATURE_TOGGLE_LIST)
 };
 const oldState: StateTree = { app: { executingOnClient: true } as AppState } as StateTree;
 const newApp = { ...oldState.app /*, locale */ };
