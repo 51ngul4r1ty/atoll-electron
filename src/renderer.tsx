@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom";
 import { remote } from "electron";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
+import TitleBar from "frameless-titlebar";
 
 // libraries
 import {
@@ -51,8 +52,32 @@ syncHistoryWithStore(store, history);
 
 const mountElt = document.getElementById("appMountElt");
 
+const icon = null;
+const menu = null;
+const currentWindow = remote.getCurrentWindow();
+
 const providerElt = (
     <Provider store={store}>
+        <TitleBar
+            icon={icon} // app icon
+            currentWindow={currentWindow} // electron window instance
+            platform={process.platform as any} // win32, darwin, linux
+            menu={menu}
+            theme={
+                {
+                    // any theme overrides specific
+                    // to your application :)
+                }
+            }
+            title="Atoll"
+            onClose={() => currentWindow.close()}
+            onMinimize={() => currentWindow.minimize()}
+            onMaximize={() => currentWindow.maximize()}
+            // when the titlebar is double clicked
+            onDoubleClick={() => currentWindow.maximize()}
+        >
+            {/* custom titlebar items */}
+        </TitleBar>
         <ConnectedRouter history={history}>{buildRoutesForElectron(window)}</ConnectedRouter>
     </Provider>
 );

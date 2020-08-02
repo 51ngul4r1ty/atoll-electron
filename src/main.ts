@@ -2,6 +2,10 @@ const { app, BrowserWindow } = require("electron");
 
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
 
+// const framelessPlugin = require("electron-frameless-window-plugin");
+
+// import { plugin } from "electron-frameless-window-plugin";
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
     // eslint-disable-line global-require
@@ -13,6 +17,7 @@ if (require("electron-squirrel-startup")) {
 let mainWindow;
 
 const createWindow = () => {
+    // const framelessPlugin = require("electron-frameless-window-plugin");
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
@@ -20,12 +25,16 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             webSecurity: false
-        } //,
+        },
         // titleBarStyle: "customButtonsOnHover",
-        // frame: false
+        frame: false,
+        titleBarStyle: "hidden"
         // frame: false
     });
-
+    // framelessPlugin.plugin({
+    //     browserWindow: mainWindow,
+    //     fixDragRegion: false
+    // });
     // this hides the menu
     mainWindow.setMenu(null);
 
@@ -73,3 +82,7 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+// plugin({
+//     setGlobal: true
+// });
