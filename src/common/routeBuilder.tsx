@@ -11,6 +11,7 @@ import { buildFeatureTogglesList, FEATURE_TOGGLE_LIST } from "@atoll/shared";
 import {
     IntlProvider,
     AppContainer,
+    //    createAppContainer,
     LoginViewContainer,
     PlanViewContainer,
     SprintViewContainer,
@@ -18,19 +19,23 @@ import {
     layouts
 } from "@atoll/shared";
 
-const appRoutes = (
-    <layouts.MainLayout>
-        <AppContainer>
-            <Switch>
-                <Route path="/" exact component={LoginViewContainer} />
-                <Route path="/plan" exact component={PlanViewContainer} />
-                <Route path="/sprint" exact component={SprintViewContainer} />
-                <Route path="/review" exact component={ReviewViewContainer} />
-                <Route component={LoginViewContainer} />
-            </Switch>
-        </AppContainer>
-    </layouts.MainLayout>
-);
+const buildAppRoutes = (/* forElectron: boolean */) => {
+    //   const AppContainer = createAppContainer(forElectron);
+    const appRoutes = (
+        <layouts.MainLayout>
+            <AppContainer>
+                <Switch>
+                    <Route path="/" exact component={LoginViewContainer} />
+                    <Route path="/plan" exact component={PlanViewContainer} />
+                    <Route path="/sprint" exact component={SprintViewContainer} />
+                    <Route path="/review" exact component={ReviewViewContainer} />
+                    <Route component={LoginViewContainer} />
+                </Switch>
+            </AppContainer>
+        </layouts.MainLayout>
+    );
+    return appRoutes;
+};
 
 const getDefaultFlags = (windowObj: any, forSsr: boolean) => {
     if (forSsr) {
@@ -40,7 +45,7 @@ const getDefaultFlags = (windowObj: any, forSsr: boolean) => {
     return toggles;
 };
 
-export const buildRoutes = (windowObj: any, forSsr: boolean) => (
+export const buildRoutes = (windowObj: any, forSsr: boolean, forElectron?: boolean) => (
     <IntlProvider>
         <ConfigureFlopFlip
             adapter={adapter as any}
@@ -48,10 +53,10 @@ export const buildRoutes = (windowObj: any, forSsr: boolean) => (
             defaultFlags={getDefaultFlags(windowObj, forSsr)}
         >
             {({ isAdapterReady }) => {
-                return isAdapterReady ? appRoutes : <div>LOADING...</div>;
+                return isAdapterReady ? buildAppRoutes(forElectron) : <div>LOADING...</div>;
             }}
         </ConfigureFlopFlip>
     </IntlProvider>
 );
 
-export const buildRoutesForElectron = (windowObj: any) => buildRoutes(windowObj, false);
+export const buildRoutesForElectron = (windowObj: any) => buildRoutes(windowObj, false, true);

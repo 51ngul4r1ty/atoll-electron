@@ -1,7 +1,7 @@
 // externals
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { remote } from "electron";
+import { ipcRenderer, remote } from "electron";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 
@@ -51,6 +51,15 @@ syncHistoryWithStore(store, history);
 
 const mountElt = document.getElementById("appMountElt");
 
+(window as any).atoll__CloseApp = () => {
+    console.log("'atoll-close-app' sent from renderer");
+    ipcRenderer.send("atoll-close-app");
+    // https://github.com/electron/electron/issues/7475
+    // if (app) {
+    // app.exit();
+    // }
+};
+
 const providerElt = (
     <Provider store={store}>
         <ConnectedRouter history={history}>{buildRoutesForElectron(window)}</ConnectedRouter>
@@ -72,6 +81,9 @@ const reload = () => {
 remote.globalShortcut.register("F5", reload);
 remote.globalShortcut.register("CommandOrControl+R", reload);
 window.addEventListener("beforeunload", () => {
+    console.log("beforeunload triggered");
     remote.globalShortcut.unregister("F5");
     remote.globalShortcut.unregister("CommandOrControl+R");
+    console.log("beforeunload completed");
+    return true;
 });
