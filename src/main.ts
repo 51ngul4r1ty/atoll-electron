@@ -14,16 +14,18 @@ let mainWindow;
 
 ipcMain.on("atoll-close-app", (evt, avg) => {
     console.log("'atoll-close-app' received in main");
-    if (!mainWindow.close) {
-        console.log("main window close function is undefined!");
-    }
     mainWindow.close();
-    console.log("main window closed");
-    if (!app.quit) {
-        console.log("app quit function is undefined!");
-    }
     app.quit();
-    console.log("after quit");
+});
+
+ipcMain.on("atoll-maximize-app", (evt, avg) => {
+    console.log("'atoll-maximize-app' received in main");
+    mainWindow.maximize();
+});
+
+ipcMain.on("atoll-minimize-app", (evt, avg) => {
+    console.log("'atoll-minimize-app' received in main");
+    mainWindow.minimize();
 });
 
 const createWindow = () => {

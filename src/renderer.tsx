@@ -54,10 +54,16 @@ const mountElt = document.getElementById("appMountElt");
 (window as any).atoll__CloseApp = () => {
     console.log("'atoll-close-app' sent from renderer");
     ipcRenderer.send("atoll-close-app");
-    // https://github.com/electron/electron/issues/7475
-    // if (app) {
-    // app.exit();
-    // }
+};
+
+(window as any).atoll__MaximizeApp = () => {
+    console.log("'atoll-maximize-app' sent from renderer");
+    ipcRenderer.send("atoll-maximize-app");
+};
+
+(window as any).atoll__MinimizeApp = () => {
+    console.log("'atoll-minimize-app' sent from renderer");
+    ipcRenderer.send("atoll-minimize-app");
 };
 
 const providerElt = (
