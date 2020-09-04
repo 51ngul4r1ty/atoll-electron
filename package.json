@@ -14,7 +14,8 @@
   },
   "scripts": {
     "clean": "rimraf build",
-    "prestart": "npm run clean && npm run compile",
+    "startsync": "node scripts/sync-if-linked.js",
+    "prestart": "npm run clean && npm run startsync && npm run compile",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -36,7 +37,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@atoll/shared": "0.15.0",
+    "@atoll/shared": "0.16.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.19.2",

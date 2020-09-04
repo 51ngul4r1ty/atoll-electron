@@ -18,19 +18,22 @@ import {
     layouts
 } from "@atoll/shared";
 
-const appRoutes = (
-    <layouts.MainLayout>
-        <AppContainer>
-            <Switch>
-                <Route path="/" exact component={LoginViewContainer} />
-                <Route path="/plan" exact component={PlanViewContainer} />
-                <Route path="/sprint" exact component={SprintViewContainer} />
-                <Route path="/review" exact component={ReviewViewContainer} />
-                <Route component={LoginViewContainer} />
-            </Switch>
-        </AppContainer>
-    </layouts.MainLayout>
-);
+const buildAppRoutes = () => {
+    const appRoutes = (
+        <layouts.MainLayout>
+            <AppContainer>
+                <Switch>
+                    <Route path="/" exact component={LoginViewContainer} />
+                    <Route path="/plan" exact component={PlanViewContainer} />
+                    <Route path="/sprint" exact component={SprintViewContainer} />
+                    <Route path="/review" exact component={ReviewViewContainer} />
+                    <Route component={LoginViewContainer} />
+                </Switch>
+            </AppContainer>
+        </layouts.MainLayout>
+    );
+    return appRoutes;
+};
 
 const getDefaultFlags = (windowObj: any, forSsr: boolean) => {
     if (forSsr) {
@@ -48,7 +51,7 @@ export const buildRoutes = (windowObj: any, forSsr: boolean) => (
             defaultFlags={getDefaultFlags(windowObj, forSsr)}
         >
             {({ isAdapterReady }) => {
-                return isAdapterReady ? appRoutes : <div>LOADING...</div>;
+                return isAdapterReady ? buildAppRoutes() : <div>LOADING...</div>;
             }}
         </ConfigureFlopFlip>
     </IntlProvider>

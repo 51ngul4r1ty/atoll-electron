@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, ipcMain, BrowserWindow } = require("electron");
 
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
 
@@ -12,6 +12,27 @@ if (require("electron-squirrel-startup")) {
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+ipcMain.on("atoll-close-app", (evt, avg) => {
+    console.log("'atoll-close-app' received in main");
+    mainWindow.close();
+    app.quit();
+});
+
+ipcMain.on("atoll-maximize-app", (evt, avg) => {
+    console.log("'atoll-maximize-app' received in main");
+    mainWindow.maximize();
+});
+
+ipcMain.on("atoll-restore-app", (evt, avg) => {
+    console.log("'atoll-restore-app' received in main");
+    mainWindow.restore();
+});
+
+ipcMain.on("atoll-minimize-app", (evt, avg) => {
+    console.log("'atoll-minimize-app' received in main");
+    mainWindow.minimize();
+});
+
 const createWindow = () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -20,10 +41,9 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             webSecurity: false
-        } //,
-        // titleBarStyle: "customButtonsOnHover",
-        // frame: false
-        // frame: false
+        },
+        //        titleBarStyle: "customButtonsOnHover",
+        frame: false
     });
 
     // this hides the menu
@@ -34,6 +54,11 @@ const createWindow = () => {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
+
+    mainWindow.on("close", function(e) {
+        e.preventDefault();
+        mainWindow.destroy();
+    });
 
     // Emitted when the window is closed.
     mainWindow.on("closed", () => {
