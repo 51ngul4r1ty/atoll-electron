@@ -61,6 +61,11 @@ const mountElt = document.getElementById("appMountElt");
     ipcRenderer.send("atoll-maximize-app");
 };
 
+(window as any).atoll__RestoreApp = () => {
+    console.log("'atoll-restore-app' sent from renderer");
+    ipcRenderer.send("atoll-restore-app");
+};
+
 (window as any).atoll__MinimizeApp = () => {
     console.log("'atoll-minimize-app' sent from renderer");
     ipcRenderer.send("atoll-minimize-app");

@@ -23,6 +23,11 @@ ipcMain.on("atoll-maximize-app", (evt, avg) => {
     mainWindow.maximize();
 });
 
+ipcMain.on("atoll-restore-app", (evt, avg) => {
+    console.log("'atoll-restore-app' received in main");
+    mainWindow.restore();
+});
+
 ipcMain.on("atoll-minimize-app", (evt, avg) => {
     console.log("'atoll-minimize-app' received in main");
     mainWindow.minimize();
