@@ -73,6 +73,53 @@ const mountElt = document.getElementById("appMountElt");
     ipcRenderer.send("atoll-minimize-app");
 };
 
+enum TitleBarDoubleClickAction {
+    None = 0,
+    Miminize = 1,
+    Default = 2
+}
+
+(window as any).atoll__TitleBarDoubleClick = () => {
+    console.log("'atoll-titlebar-doubleclick' sent from renderer");
+    const win = remote.getCurrentWindow();
+    if (win) {
+        let titleBarDoubleClickAction = TitleBarDoubleClickAction.Default;
+        if (process.platform === "darwin") {
+            // `getUserDefault` is only available under macOS
+            const action = remote.systemPreferences.getUserDefault("AppleActionOnDoubleClick", "string");
+            switch (action) {
+                case "None":
+                    // Action disabled entirely, nothing to do
+                    titleBarDoubleClickAction = TitleBarDoubleClickAction.None;
+                    break;
+                case "Minimize":
+                    // The user prefers to minimize the window, weird
+                    titleBarDoubleClickAction = TitleBarDoubleClickAction.Miminize;
+                    break;
+                default:
+                    break;
+            }
+        }
+        switch (titleBarDoubleClickAction) {
+            case TitleBarDoubleClickAction.Miminize:
+                win.minimize();
+                break;
+            case TitleBarDoubleClickAction.Default:
+                // Toggling maximization otherwise
+                // Under macOS this should actually trigger the "zoom" action, but I believe that's identical to toggling maximization for Electron apps, so we'll just do that for simplicity here
+                // In case you want to trigger the zoom action for some reason: Menu.sendActionToFirstResponder ( 'zoom:' );
+                if (win.isMaximized()) {
+                    win.unmaximize();
+                } else {
+                    win.maximize();
+                }
+                break;
+        }
+        // This doesn't have to be intercepted in the main code, but it can be in future.
+        ipcRenderer.send("atoll-titlebar-doubleclick");
+    }
+};
+
 const providerElt = (
     <Provider store={store}>
         <ConnectedRouter history={history}>{buildRoutesForElectron(window)}</ConnectedRouter>
