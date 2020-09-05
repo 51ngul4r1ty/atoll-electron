@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../atoll-shared"
+		},
+		{
+			"path": "../atoll-core"
 		}
 	],
 	"settings": {
