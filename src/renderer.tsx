@@ -39,12 +39,12 @@ initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
 const featureToggles: FeatureTogglesState = {
     toggles: buildFeatureTogglesList(FEATURE_TOGGLE_LIST)
 };
-const oldState: StateTree = { app: { executingOnClient: true } as AppState } as StateTree;
+const oldState: StateTree = { app: { executingOnClient: true, electronClient: true } as AppState } as StateTree;
 const newApp = { ...oldState.app /*, locale */ };
 const newState: StateTree = { ...oldState, app: newApp, featureToggles };
 
 const store = configureStore({
-    initialState: newState, // { app: { executingOnClient: true } },
+    initialState: newState,
     history,
     middleware: [],
     windowRef: window
