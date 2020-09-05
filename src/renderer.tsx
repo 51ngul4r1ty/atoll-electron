@@ -7,18 +7,20 @@ import { ConnectedRouter } from "connected-react-router";
 
 // libraries
 import {
-    storeHistoryInstance,
-    initConfig,
-    createElectronClientHistory,
-    configureStore,
     buildFeatureTogglesList,
-    StateTree,
+    configureStore,
+    createElectronClientHistory,
+    initConfig,
+    isPlatformMacOSX,
+    isPlatformWindows,
+    storeHistoryInstance,
+    FEATURE_TOGGLE_LIST,
     FeatureTogglesState,
-    FEATURE_TOGGLE_LIST
+    StateTree
 } from "@atoll/shared";
 
 // shared code
-import { buildRoutesForElectron } from "common/routeBuilder";
+import { buildRoutesForElectron } from "./common/routeBuilder";
 import { AppState } from "@atoll/shared";
 
 const history = createElectronClientHistory();
@@ -89,12 +91,26 @@ const reload = () => {
     remote.getCurrentWindow().reload();
 };
 
-remote.globalShortcut.register("F5", reload);
-remote.globalShortcut.register("CommandOrControl+R", reload);
+let f5Registered = false;
+if (isPlatformWindows()) {
+    remote.globalShortcut.register("F5", reload);
+    f5Registered = true;
+}
+
+let ctrlRRegistered = false;
+if (isPlatformMacOSX()) {
+    remote.globalShortcut.register("CommandOrControl+R", reload);
+    ctrlRRegistered = true;
+}
+
 window.addEventListener("beforeunload", () => {
     console.log("beforeunload triggered");
-    remote.globalShortcut.unregister("F5");
-    remote.globalShortcut.unregister("CommandOrControl+R");
+    if (f5Registered) {
+        remote.globalShortcut.unregister("F5");
+    }
+    if (ctrlRRegistered) {
+        remote.globalShortcut.unregister("CommandOrControl+R");
+    }
     console.log("beforeunload completed");
     return true;
 });
