@@ -79,6 +79,14 @@ enum TitleBarDoubleClickAction {
     Default = 2
 }
 
+(window as any).atoll__IsWindowMaximized = (): boolean | undefined => {
+    const win = remote.getCurrentWindow();
+    if (!win) {
+        return undefined;
+    }
+    return win.isMaximized();
+};
+
 (window as any).atoll__TitleBarDoubleClick = () => {
     console.log("'atoll-titlebar-doubleclick' sent from renderer");
     const win = remote.getCurrentWindow();
@@ -100,9 +108,11 @@ enum TitleBarDoubleClickAction {
                     break;
             }
         }
+        let result = false;
         switch (titleBarDoubleClickAction) {
             case TitleBarDoubleClickAction.Miminize:
                 win.minimize();
+                result = true;
                 break;
             case TitleBarDoubleClickAction.Default:
                 // Toggling maximization otherwise
@@ -110,13 +120,16 @@ enum TitleBarDoubleClickAction {
                 // In case you want to trigger the zoom action for some reason: Menu.sendActionToFirstResponder ( 'zoom:' );
                 if (win.isMaximized()) {
                     win.unmaximize();
+                    result = true;
                 } else {
                     win.maximize();
+                    result = true;
                 }
                 break;
         }
         // This doesn't have to be intercepted in the main code, but it can be in future.
         ipcRenderer.send("atoll-titlebar-doubleclick");
+        return result;
     }
 };
 
