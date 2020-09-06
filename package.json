@@ -1,7 +1,7 @@
 {
   "name": "atollelectron",
   "productName": "atollelectron",
-  "version": "0.15.0",
+  "version": "0.17.0",
   "author": {
     "name": "Kevin Berry",
     "email": "41717340+51ngul4r1ty@users.noreply.github.com"
@@ -15,15 +15,15 @@
   "scripts": {
     "clean": "rimraf build",
     "startsync": "node scripts/sync-if-linked.js",
-    "prestart": "npm run clean && npm run startsync && npm run compile",
+    "prestart": "npm run clean && npm run startsync && npm run build",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
-    "compile": "npm run compile:main & npm run compile:renderer",
-    "compile:main": "webpack --config config/webpack.main.config.js",
-    "compile:renderer": "webpack --config config/webpack.renderer.config.js",
+    "build": "npm run build:main & npm run build:renderer",
+    "build:main": "webpack --config config/webpack.main.config.js",
+    "build:renderer": "webpack --config config/webpack.renderer.config.js",
     "local-publish:shared": "cd .. && cd atoll-shared && npm run local-publish && cd ..",
     "local-publish-quick:shared": "cd .. && cd atoll-shared && npm run local-publish-quick && cd ..",
     "local-link:shared": "npx --no-install yalc add @atoll/shared",
@@ -37,7 +37,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@atoll/shared": "0.16.0",
+    "@atoll/shared": "0.17.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.19.2",

@@ -42,7 +42,7 @@ const createWindow = () => {
             nodeIntegration: true,
             webSecurity: false
         },
-        //        titleBarStyle: "customButtonsOnHover",
+        titleBarStyle: "hidden", // hides everything on Windows, but keeps "traffic light" window frame controls on Mac OS X
         frame: false
     });
 
