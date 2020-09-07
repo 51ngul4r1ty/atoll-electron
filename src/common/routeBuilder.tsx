@@ -18,18 +18,28 @@ import {
     layouts
 } from "@atoll/shared";
 
+const wrapViewContainer = (Container: any, props: any, appProps?: any): any => {
+    return (
+        <AppContainer {...appProps}>
+            <Container {...props} />
+        </AppContainer>
+    );
+};
+
 const buildAppRoutes = () => {
     const appRoutes = (
         <layouts.MainLayout>
-            <AppContainer>
-                <Switch>
-                    <Route path="/" exact component={LoginViewContainer} />
-                    <Route path="/plan" exact component={PlanViewContainer} />
-                    <Route path="/sprint" exact component={SprintViewContainer} />
-                    <Route path="/review" exact component={ReviewViewContainer} />
-                    <Route component={LoginViewContainer} />
-                </Switch>
-            </AppContainer>
+            <Switch>
+                <Route
+                    path="/"
+                    exact
+                    render={(props) => wrapViewContainer(LoginViewContainer, props, { allowTitleBarWindowDragging: true })}
+                />
+                <Route path="/plan" exact render={(props) => wrapViewContainer(PlanViewContainer, props)} />
+                <Route path="/sprint" exact render={(props) => wrapViewContainer(SprintViewContainer, props)} />
+                <Route path="/review" exact render={(props) => wrapViewContainer(ReviewViewContainer, props)} />
+                <Route render={(props) => wrapViewContainer(LoginViewContainer, props)} />
+            </Switch>
         </layouts.MainLayout>
     );
     return appRoutes;
