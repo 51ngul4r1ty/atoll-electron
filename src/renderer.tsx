@@ -7,16 +7,17 @@ import { ConnectedRouter } from "connected-react-router";
 
 // libraries
 import {
+    FEATURE_TOGGLE_LIST,
+    FeatureTogglesState,
+    StateTree,
     buildFeatureTogglesList,
     configureStore,
     createElectronClientHistory,
     initConfig,
     isPlatformMacOSX,
     isPlatformWindows,
-    storeHistoryInstance,
-    FEATURE_TOGGLE_LIST,
-    FeatureTogglesState,
-    StateTree
+    rootReducerInitialState,
+    storeHistoryInstance
 } from "@atoll/shared";
 
 // shared code
@@ -39,7 +40,12 @@ initConfig({ getDocumentLocHref: () => "http://localhost:8500/" });
 const featureToggles: FeatureTogglesState = {
     toggles: buildFeatureTogglesList(FEATURE_TOGGLE_LIST)
 };
-const oldState: StateTree = { app: { executingOnClient: true, electronClient: true } as AppState } as StateTree;
+
+const baseState = rootReducerInitialState;
+const oldState: StateTree = {
+    ...baseState,
+    app: { ...baseState.app, executingOnClient: true, electronClient: true } as AppState
+} as StateTree;
 const newApp = { ...oldState.app /*, locale */ };
 const newState: StateTree = { ...oldState, app: newApp, featureToggles };
 

@@ -8,6 +8,7 @@
         "build": true,
         "coverage": true,
         "node_modules": true,
+        ".yalc": true
     },
     "bookmarks.navigateThroughAllFiles": true,
     "bookmarks.backgroundLineColor": "#102030",
