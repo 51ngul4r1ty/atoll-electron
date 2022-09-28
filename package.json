@@ -92,7 +92,6 @@
     "@types/react-router-dom": "5.1.5",
     "@types/webpack-env": "1.15.1",
     "autoprefixer": "9.7.6",
-    "awesome-typescript-loader": "5.2.1",
     "babel-loader": "8.1.0",
     "babel-plugin-macros": "2.6.1",
     "babel-plugin-named-asset-import": "0.3.3",
