@@ -200,7 +200,7 @@ const plugins = {
 };
 
 const baseConfig = {
-    name: "bundle",
+    name: "client",
     target: "electron-renderer",
     entry: {
         bundle: [
