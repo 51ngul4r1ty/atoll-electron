@@ -140,7 +140,7 @@ const desktopLoaders = [
 
 module.exports = {
     mode: "development",
-    name: "main",
+    name: "desktop",
     target: "electron-main",
     entry: {
         main: path.resolve(paths.src, "main.ts")

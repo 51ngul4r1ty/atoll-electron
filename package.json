@@ -13,7 +13,7 @@
     "npm": ">=6.10.1"
   },
   "scripts": {
-    "clean": "rimraf build",
+    "clean": "npx rimraf build",
     "startsync": "node scripts/sync-if-linked.js",
     "prestart": "npm run clean && npm run startsync && npm run build",
     "start": "electron-forge start",
