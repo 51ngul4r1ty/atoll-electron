@@ -14,3 +14,4 @@ yarn-error.log
 tmp
 .yalc/
 yalc.lock
+.DS_Store

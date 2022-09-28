@@ -143,18 +143,18 @@ module.exports = {
     name: "desktop",
     target: "electron-main",
     entry: {
-        index: path.resolve(paths.src, "main.ts")
+        main: path.resolve(paths.src, "main.ts")
     },
     externals: [
         nodeExternals({
             // we still want imported css from external files to be bundled otherwise 3rd party packages
             // which require us to include their own css would not work properly
-            whitelist: /\.css$/
+            allowlist: /\.css$/
         })
     ],
     output: {
         path: paths.build,
-        filename: "main.js",
+        filename: "[name].js",
         publicPath: paths.publicPath
     },
     // node: {
