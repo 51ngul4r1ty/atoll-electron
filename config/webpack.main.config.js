@@ -143,7 +143,7 @@ module.exports = {
     name: "main",
     target: "electron-main",
     entry: {
-        index: path.resolve(paths.src, "main.ts")
+        main: path.resolve(paths.src, "main.ts")
     },
     externals: [
         nodeExternals({
