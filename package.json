@@ -37,7 +37,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@atoll/shared": "0.17.2",
+    "@atoll/shared": "0.65.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.19.2",
